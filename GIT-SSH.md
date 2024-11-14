@@ -25,7 +25,7 @@ function githubpriv() {
 git remote rm origin
 git remote -v
 
-
+HTTPS:
 echo "# pf-2-html" >> README.md
 git init
 git add README.md
@@ -36,9 +36,20 @@ git push -u origin main
 
 
 SSH:
+echo "# pf-2-html" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
 git remote add origin git@github.com:jaonkeller/pf-2-html.git
+git push -u origin main
 
 
 
 git config --local user.email "jirotakahashi.work@gmail.com"
 git config --local user.name "jaonkeller"
+
+
+
+git fetch
+git reset --hard origin/main
