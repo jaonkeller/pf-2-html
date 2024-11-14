@@ -1,0 +1,337 @@
+// Variables
+$color-1: #262626;
+
+// Mixin
+
+@mixin test{
+	background: #00f !important;
+	border: 1px solid #0f0 !important;
+}
+@mixin test-2{
+	background: #7a4 !important;
+	border: 1px solid #f00 !important;
+}
+$prefixes: "webkit", "moz", "ms", "o", "none";
+@mixin prefix($property, $arguments) {
+ @each $prefix in $prefixes {
+   @if $prefix == "none" {
+     #{$property}: $arguments;
+   } @else {
+     -#{$prefix}-#{$property}: $arguments;
+   } 
+ }
+}
+@mixin trans{
+	transition: all .25s ease-in-out;
+}
+
+
+// Style Reset
+html, body, h1, h2, h3, h4, h5, h6, a, p, span, em, small, strong,
+sub, sup, mark, del, ins, strike, abbr, dfn, blockquote, q, cite,
+code, pre, ol, ul, li, dl, dt, dd, div, section, article, main, aside, nav, header, hgroup, footer, img, figure, figcaption, address, time, audio, video, canvas, iframe, details, summary, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+* {
+	box-sizing: border-box;
+}
+ol, ul {
+  list-style: none;
+}
+a{
+	color: inherit;
+	text-decoration: none;
+}
+img, video {
+  max-width: 100%;
+}
+img, button {
+	border-style: none;
+	outline: none;
+}
+address{
+	font-style: normal;;
+}
+
+// Basic Style Format
+html{
+	width: 100%;
+	height: 100%;
+	font-size: 18px;
+	line-height: 1.5;
+	background-color: $color-1;
+}
+body {
+	color: #fff;
+	width: 100vw;
+	height: 100vh;
+	font-size: 1rem;
+  // background-color: #09df92;
+  
+  // padding: 1vw;
+  font-family: Helvetica Neue,Arial,Noto Sans,sans-serif;
+}
+nav {
+	text-transform: uppercase;
+}
+
+
+h1,h2,h3,h4,h5{
+  font-weight: 400;
+}
+h1{
+	font-size:7rem;
+}
+
+li{
+	list-style: none;
+}
+
+
+// Custom Classes
+.text-outline{
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #fff;
+	color: transparent;
+}
+.visuallyhidden { 
+  position: absolute; 
+  overflow: hidden; 
+  clip: rect(0 0 0 0); 
+	height: 1px;
+	width: 1px; 
+	margin: -1px;
+	padding: 0;
+	border: 0; 
+}
+.link.slot{
+	position: relative;
+	overflow: hidden;
+	display: block;
+
+	.link-text{
+		display: block;
+		transition: transform .4s cubic-bezier(.06,.66,.54,.93);
+	}
+	.link-text::after {
+		content: attr(data-text);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		transform: translateY(100%);
+	}
+	&:hover .link-text{
+		transform: translateY(-100%);
+	}
+}
+
+// Media Query Setting
+@media (min-width: 1600px) {
+	.container{
+		padding: 0 12rem;
+	}
+}
+@media (max-width: 1599px) and (min-width: 1025px){
+	.container{
+		padding: 0 9rem;
+	}
+}
+@media (max-width: 1024px) and (min-width: 768px){
+	.container{
+		padding: 0 7rem;
+	}
+}
+@media (max-width: 1024px) {
+	.container{
+		padding: 0 2rem;
+	}
+	.header .container{
+		display: none;
+	}
+}
+@media (max-width: 767px) {
+	.container{
+		padding: 0 2rem;
+	}
+}
+
+
+
+// Components 
+
+// Menu Overlay
+.overlay {  
+	height: 100%;
+	width: 0;
+  width: 100%;
+  position: fixed; 
+  z-index: 2000; /* Sit on top */
+  left: 0;
+  top: 0;
+  background-color: $color-1;
+  overflow-x: hidden; 
+	transition: 0.5s;
+	
+	.overlay-content {
+		display: flex;
+    flex-wrap: wrap;
+		min-height: 100%;
+		flex-direction: row;
+		align-items: center;
+		> *{
+			@include test;
+		}
+		.col-l{
+			flex: 0 0 70%;
+		}
+		.nav{
+			font-size: 6.33rem;
+			line-height: 1.1;
+			
+			.nav-list{
+				.nav-menu{
+					.link{
+						@include trans;
+					}
+					
+					&:hover .link{
+						-webkit-text-stroke-width: none;
+						-webkit-text-stroke-color: none;
+						color: #fff;
+						
+					}
+				}
+			}
+		}
+		
+	}
+}
+
+
+
+/* The navigation links inside the overlay */
+
+
+/* When you mouse over the navigation links, change their color */
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+/* Position the close button (top right corner) */
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+.btn-open{
+	display: inline-block;
+	z-index: 9999;
+	position: fixed;
+}
+
+
+
+.container{
+
+}
+.container-fluid{
+	padding: 0;
+	// width: 100%;
+}
+
+
+
+div.wrapper{
+	
+}
+
+
+// Header
+.header{
+	font-size: .89rem;
+	z-index: 999;
+	padding: 43px 0;
+
+	.logo-wrapper{
+		position: fixed;
+    top: 0;
+    left: 0;
+		.logo{
+			display: block;
+			margin: 43px;
+		}
+	}
+
+	.nav-btn{
+		overflow: visible;
+		background:none;
+		@include test;
+		position: fixed;
+		z-index: 9999;
+    top: 0;
+		right: 0;
+		height: 35px;
+		width: 35px;
+		padding: 8px 0;
+		// padding: 0 0;
+		margin: 40px;
+		display: grid;
+		place-items: center;
+		// justify-items: end;
+  	cursor: pointer;
+		.line-1, .line-2{
+			width: 100%;
+			height: 2px;
+			// margin: 10px 0;
+			background: #fff;
+			display: block;
+			justify-self: center;
+			@include trans;
+		}
+		&:hover{
+			.line-1 {    
+				@include prefix(transform, translateX(-4px));
+			}
+			.line-2 {    
+				@include prefix(transform, translateX(4px));
+			}
+		} 
+	}
+
+	.container{	
+
+		*{
+			font-size: 0.89rem;
+		}
+		.nav{
+			padding-bottom: 40px;
+			border-bottom: 1px solid #fff;
+			display: flex;
+			.creative-geek{
+				@include test;
+			}
+			
+			.nav-list{
+				flex-grow: 1;
+				@include test;
+				text-align: right;
+				.nav-menu{
+					@include test;
+					margin-left: 60px;
+					display: inline-block;
+				}
+			}
+		}
+
+	}
+}
+
+.main{
+	// font-size: 5rem;
+	margin-top: 100px;
+}
