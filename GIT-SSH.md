@@ -35,6 +35,10 @@ git remote add origin https://github.com/jaonkeller/pf-2-html.git
 git push -u origin main
 
 
+SSH:
+git remote add origin git@github.com:jaonkeller/pf-2-html.git
 
-git config --local user.email "	jirotakahashi.work@gmail.com"
+
+
+git config --local user.email "jirotakahashi.work@gmail.com"
 git config --local user.name "jaonkeller"
